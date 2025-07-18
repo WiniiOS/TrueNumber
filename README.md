@@ -22,4 +22,9 @@ Cette Api gère l'Authentification des utilisateurs dans l'écosystème de l'app
 ## Available Scripts
 
 ### `npm start:dev`
+
+##Pour Generer ou creer un compte administrateur en base de données
+
+### `npm run create-admin`
+
 ### `npm test`
