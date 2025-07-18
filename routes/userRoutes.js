@@ -57,6 +57,144 @@ router.get('/', isAuthenticated, isAdmin, userController.getAllUsers);
  */
 router.get('/:id', isAuthenticated, isAdmin, userController.getUserById);
 
+/**
+ * @swagger
+ * /api/v1/users:
+ *   post:
+ *     summary: Crée un nouvel utilisateur (Admin uniquement)
+ *     description: |
+ *       Permet à un administrateur de créer un nouveau compte utilisateur.
+ *       Requiert un token JWT valide avec le rôle 'admin'
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       description: Données de l'utilisateur à créer
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserCreate'
+ *           example:
+ *             username: "john_doe"
+ *             email: "john@example.com"
+ *             password: "SecurePassword123!"
+ *             phone: "+237612345678"
+ *             role: "client"
+ *             balance: 100
+ *     responses:
+ *       201:
+ *         description: Utilisateur créé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserResponse'
+ *             example:
+ *               message: "Compte créé avec succès"
+ *               token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *               user:
+ *                 id: "507f1f77bcf86cd799439011"
+ *                 username: "john_doe"
+ *                 email: "john@example.com"
+ *                 role: "client"
+ *                 phone: "+237612345678"
+ *                 balance: 100
+ *                 createdAt: "2023-01-01T00:00:00.000Z"
+ *       400:
+ *         description: Erreur de validation
+ *         content:
+ *           application/json:
+ *             examples:
+ *               existing_user:
+ *                 value:
+ *                   message: "Email ou nom d'utilisateur déjà utilisé"
+ *               validation_error:
+ *                 value:
+ *                   message: "Le mot de passe doit contenir au moins 6 caractères"
+ *       401:
+ *         description: Non autorisé (token manquant/invalide)
+ *       403:
+ *         description: Accès refusé (rôle insuffisant)
+ *       500:
+ *         description: Erreur serveur interne
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     UserCreate:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *         - phone
+ *       properties:
+ *         username:
+ *           type: string
+ *           minLength: 3
+ *           maxLength: 30
+ *           pattern: '^[a-zA-Z0-9_]+$'
+ *           example: "john_doe"
+ *           description: Nom d'utilisateur unique (3-30 caractères alphanumériques)
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: "john@example.com"
+ *           description: Adresse email valide et unique
+ *         password:
+ *           type: string
+ *           format: password
+ *           minLength: 6
+ *           example: "SecurePassword123!"
+ *           description: Mot de passe (minimum 6 caractères)
+ *         phone:
+ *           type: string
+ *           pattern: '^\+\d{8,15}$'
+ *           example: "+237612345678"
+ *           description: Numéro de téléphone avec indicatif pays
+ *         role:
+ *           type: string
+ *           enum: [client, admin]
+ *           default: "client"
+ *           example: "client"
+ *           description: Rôle de l'utilisateur
+ *         balance:
+ *           type: number
+ *           minimum: 0
+ *           default: 0
+ *           example: 100
+ *           description: Solde initial de points
+ *     UserResponse:
+ *       type: object
+ *       properties:
+ *         message:
+ *           type: string
+ *         token:
+ *           type: string
+ *           description: JWT pour authentification
+ *         user:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: string
+ *             username:
+ *               type: string
+ *             email:
+ *               type: string
+ *             role:
+ *               type: string
+ *             phone:
+ *               type: string
+ *             balance:
+ *               type: number
+ *             createdAt:
+ *               type: string
+ *               format: date-time
+ */
+
+router.post('/', isAuthenticated, isAdmin, userController.createUser);
 
 /**
  * @swagger
@@ -65,7 +203,7 @@ router.get('/:id', isAuthenticated, isAdmin, userController.getUserById);
  *     summary: Modifie un utilisateur existant (Admin uniquement)
  *     description: |
  *       Permet à un administrateur de modifier les informations d'un utilisateur.
- *       ⚠️ Requiert un token JWT valide avec le rôle 'admin'
+ *       Requiert un token JWT valide avec le rôle 'admin'
  *     tags: [Users]
  *     security:
  *       - BearerAuth: []
