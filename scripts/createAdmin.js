@@ -1,50 +1,44 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const bcrypt = require('bcrypt');
 
-// Configuration de la connexion MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/true_number_db', {
-  serverSelectionTimeoutMS: 15000,
-  socketTimeoutMS: 20000
-}).catch(err => {
-  console.error('Impossible de se connecter à MongoDB :', err.message);
-  process.exit(1);
-});
+// Connexion MongoDB simplifiée (sans options dépréciées)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/true_number_db')
+  .then(() => console.log('Connecté à MongoDB'))
+  .catch(err => {
+    console.error('Erreur MongoDB:', err.message);
+    process.exit(1);
+  });
 
 const createAdmin = async () => {
+  const adminData = {
+    username: 'admin_' + Math.random().toString(36).substring(2, 6), // Nom unique
+    email: 'admin@highreference.com',
+    password: 'Admin1234',
+    phone: '+237658682586',
+    role: 'admin',
+    balance: 1000
+  };
+
   try {
-    // const existingAdmin = await User.findOne({ email: 'admin@highreference.com' });
-    // if (existingAdmin) {
-    //   console.log('Le compte admin existe déjà');
-    //   return process.exit(0);
-    // }
-
-    // Créer le nouvel admin
-    const admin = new User({
-      username: 'admin1',
-      email: 'admin1@highreference.com',
-      password: 'Administrateur1234',
-      phone: '+237658682587',
-      role: 'admin',
-      balance: 0
-    });
-
-    await admin.save();
-    console.log('✅ Compte admin créé avec succès !');
-    console.log('-----------------------------');
-    console.log('Email: admin@highreference.com');
-    console.log('Mot de passe: Admin1234');
-    console.log('-----------------------------');
+    // Suppression d'éventuels admins existants
+    await User.deleteMany({ email: adminData.email });
     
+    const admin = new User(adminData);
+    await admin.save();
+
+    console.log('\n✅ ADMIN CRÉÉ AVEC SUCCÈS');
+    console.log('============================');
+    console.log(`Username: ${admin.username}`);
+    console.log(`Email:    ${admin.email}`);
+    console.log(`Password: ${adminData.password}`);
+    console.log('============================');
+
   } catch (error) {
-    console.error('❌ Erreur critique :', error.message);
-    process.exit(1);
+    console.error('❌ Erreur finale:', error.message);
   } finally {
     await mongoose.disconnect();
-    process.exit(0);
   }
 };
 
-// Démarrer le processus
 createAdmin();
