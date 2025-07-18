@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "create-admin": "node scripts/createAdmin.js"
   },
   "author": "",
   "license": "ISC",

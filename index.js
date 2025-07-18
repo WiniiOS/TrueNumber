@@ -8,6 +8,7 @@ const config = require('./config');
 const authRoutes = require('./routes/authRoutes');
 const gameRoutes = require('./routes/gameRoutes');
 const userRoutes = require('./routes/userRoutes');
+const balanceRoutes = require('./routes/balanceRoutes');
 
 const swaggerOptions = require('./swaggerOptions');
 
@@ -30,7 +31,7 @@ app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/game', gameRoutes);
 app.use('/api/v1/users', userRoutes);
-
+app.use('/api/v1/balance', balanceRoutes);
 
 // Gestion des erreurs 404
 app.use((req, res) => {
