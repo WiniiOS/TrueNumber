@@ -6,6 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const config = require('./config');
 const authRoutes = require('./routes/authRoutes');
+const gameRoutes = require('./routes/gameRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 const swaggerOptions = require('./swaggerOptions');
 
 const app = express();
@@ -25,6 +28,9 @@ app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/game', gameRoutes);
+app.use('/api/v1/users', userRoutes);
+
 
 // Gestion des erreurs 404
 app.use((req, res) => {
