@@ -29,17 +29,6 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
-  try {
-    const { username, email, password, phone, role } = req.body;
-    const user = new User({ username, email, password, phone, role });
-    await user.save();
-    return res.status(201).json(user);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
-
 exports.updateUser = async (req, res) => {
   try {
     const { role, ...updateData } = req.body;
