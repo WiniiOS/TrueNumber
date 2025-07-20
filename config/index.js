@@ -8,6 +8,9 @@ module.exports = {
     }
   },
   cors: {
-    origins: process.env.CORS_ORIGINS || 'http://localhost:3000'
-  }
+    origins: ['http://localhost:3001', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+  },
 };
