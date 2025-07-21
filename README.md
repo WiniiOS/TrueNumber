@@ -27,4 +27,10 @@ Cette Api gère l'Authentification des utilisateurs dans l'écosystème de l'app
 
 ### `npm run create-admin`
 
-### `npm test`
+### Coordonnées De L'ADMINISTRATEUR DISPONIBLE EN PRODUCTION
+
+============================
+Username: admin_rmst
+Email:    admin@highreference.com
+Password: Admin1234
+============================
