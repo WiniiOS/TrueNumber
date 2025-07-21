@@ -51,7 +51,7 @@ app.use((err, req, res, next) => {
 });
 
 // Connexion MongoDB
-mongoose.connect(config.mongoose.url, config.mongoose.options)
+mongoose.connect(config.mongoose.url)
   .then(() => {
     console.log('Connected to MongoDB successfully');
     startServer();
