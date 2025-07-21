@@ -6,6 +6,6 @@ services:
     startCommand: node index.js
     envVars:
       - key: MONGODB_URI
-        value: "mongodb+srv://franck:Admin1234@truenumbercluster.gzaowah.mongodb.net/?retryWrites=true&w=majority&appName=TrueNumberCluster"
+        value: mongodb+srv://franck:Admin1234@truenumbercluster.gzaowah.mongodb.net/?retryWrites=true&w=majority&appName=TrueNumberCluster
       - key: JWT_SECRET
         value: TrueNumberSecretKEY2025HighReference237e588962re59966494949
