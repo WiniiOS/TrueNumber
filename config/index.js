@@ -9,7 +9,7 @@ module.exports = {
     }
   },
   cors: {
-    origins: ['http://localhost:3001', 'http://localhost:3000'],
+    origins: ['http://localhost:3001', 'http://localhost:3000','https://jeu-true-number.vercel.app'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
