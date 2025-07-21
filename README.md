@@ -2,7 +2,8 @@
 
 ## API Documentation/ Swagger
 
-### http://localhost:3000/api/v1/api-docs/
+### Local : http://localhost:3000/api/v1/api-docs/
+### Production : https://truenumber-h408.onrender.com/api/v1/api-docs
 
 # 📦 Auth-service
 
@@ -29,8 +30,7 @@ Cette Api gère l'Authentification des utilisateurs dans l'écosystème de l'app
 
 ### Coordonnées De L'ADMINISTRATEUR DISPONIBLE EN PRODUCTION
 
-============================
-Username: admin_rmst
-Email:    admin@highreference.com
-Password: Admin1234
-============================
+
+- Username: admin_rmst
+- Email:    admin@highreference.com
+- Password: Admin1234

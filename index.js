@@ -66,7 +66,8 @@ function startServer() {
   const server = app.listen(PORT, () => {
     console.log(`Authentication Service running on port ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`API Documentation: http://localhost:${PORT}/api/v1/api-docs`);
+    console.log(`API Documentation LOCAL: http://localhost:${PORT}/api/v1/api-docs`);
+    console.log(`API Documentation PRODUCTION: https://truenumber-h408.onrender.com/api/v1/api-docs/`);
   });
   
   // Gestion des arrêts gracieux
